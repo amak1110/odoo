@@ -1,8 +1,32 @@
 api-version: reviewpad.com/v3.x
+
 on:
-  push:
-    branches:
-      - 12.0-testing
+  pull_request:
+    branches: [12.0-testing]
+
+jobs:
+  automerge:
+    runs-on: ubuntu-latest
+    steps:
+      - name: git checkout
+        uses: actions/checkout@v2
+        with:
+          token: ${{ secrets.TOKEN }}
+          ref: ${{ github.event.pull_request.head.ref }}
+          fetch-depth: 0
+
+      - name: perform merge
+        run: |
+          printenv
+          git config --global user.email "${GITHUB_REPOSITORY_OWNER}"
+          git config --global user.name "${GITHUB_REPOSITORY_OWNER}@users.noreply.github.com"
+          git status
+          git pull
+          git checkout $GITHUB_BASE_REF
+          git pull origin $GITHUB_BASE_REF
+          git merge $GITHUB_HEAD_REF --no-edit
+          git push origin $GITHUB_BASE_REF
+          git status
 labels:
   small:
     description: Pull request is small
