@@ -8,6 +8,7 @@
     Make the lock date irreversible:
     fix
     update
+    asdasd
     * You cannot define stricter conditions on advisors than on users. Then, the lock date on advisor must be set before the lock date for users.
     * You cannot lock a period that is not finished yet. Then, the lock date for advisors must be set before the last day of the previous month.
     * The new lock date for advisors must be set after the previous lock date.
