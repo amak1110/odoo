@@ -8,6 +8,7 @@
     'description': """
 Allows canceling accounting entries.
 ====================================
+asdasd
 
 This module adds a checkbox on the accounting journals to allow the cancellation of journal entries.
 
